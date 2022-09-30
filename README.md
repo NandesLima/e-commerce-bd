@@ -73,3 +73,14 @@
 
 **Produto x Terceiros (N, M)** - Disponibilizar produto (Terceiro)
 
+## Modelo UML
+
+![](https://github.com/NandesLima/e-commerce-bd/blob/master/modelo-uml.png)
+
+
+## Modelo EER
+
+![](https://github.com/NandesLima/e-commerce-bd/blob/master/modelo-EER.png)
+
+
+
