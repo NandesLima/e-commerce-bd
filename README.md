@@ -1,86 +1,77 @@
-# Projeto Ecommerce
+# 🛒 Modelagem de Banco de Dados: E-commerce (Marketplace)
 
-## Narrativa
+<div align="center">
+  <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Marketplace-Strategy-orange?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Database_Architecture-7000ff?style=for-the-badge&logo=diagramsdotnet&logoColor=white" />
+</div>
 
-### Produto
+<br>
 
-- Os produtos são vendidos por uma única plataforma online. Contudo, estes podem ter vendedores distintos (terceiros).
+> **Objetivo:** Projetar a arquitetura de dados para uma plataforma de E-commerce complexa, contemplando o fluxo desde o cadastro de produtos por terceiros (Marketplace) até a logística de entrega e processamento de pagamentos múltiplos.
 
-- Cada produto possui um fornecedor.
+---
 
-- Um ou mais produtos podem compor um pedido.
+## 🎯 Visão Geral do Projeto
 
+Diferente de um e-commerce simples, este modelo foi desenhado para suportar um cenário de **Marketplace**, onde os produtos podem vir tanto de fornecedores diretos quanto de vendedores terceiros. O projeto foca na normalização de dados e na integridade referencial para garantir que pedidos, estoques e entregas estejam perfeitamente sincronizados.
 
-### Cliente
+Utilizei o **MySQL Workbench** (`.mwb`) para criar a modelagem física e lógica.
 
-- Cliente pode se cadastrar no site com CPF ou CNPJ.
+👉 **[Fazer o download do Arquivo do Modelo (.mwb)](e-commerce.mwb)**
 
-- O Endereço do cliente irá determinar o valor do frete.
+---
 
-- Um cliente pode comprar mais de um pedido. Este têm um período de carência para devolução do produto.
+## 📖 Regras de Negócio e Narrativa
 
+A arquitetura foi construída sobre os seguintes pilares de negócio:
 
-### Pedido
+### 📦 Gestão de Produtos e Vendedores
+- **Hibridismo:** Suporte para produtos vendidos pela plataforma e por vendedores terceiros.
+- **Fornecedores:** Todo produto possui um fornecedor de origem vinculado.
+- **Estoque:** Controle de localização física dos produtos.
 
-- Os pedidos são criados por clientes e possuem informações de compra, endereço e status da entrega.
+### 👤 Gestão de Clientes e Pagamentos
+- **Identificação Flexível:** Cadastro suporta tanto Pessoa Física (CPF) quanto Pessoa Jurídica (CNPJ).
+- **Logística:** O endereço do cliente é o trigger para o cálculo automático de frete.
+- **Carteira:** Um cliente pode gerenciar múltiplas formas de pagamento.
 
-- Um produto ou mais compõem o pedido
+### 🧾 Ciclo do Pedido
+- **Composição:** Pedidos podem conter múltiplos itens de diferentes vendedores.
+- **Status:** Acompanhamento em tempo real desde a criação, cancelamento até a entrega final.
+- **Rastreio:** Integração de código de rastreamento para controle logístico.
 
-- O pedido pode ser cancelado
+---
 
+## 🏗️ Estrutura do Banco de Dados
 
+### 🧩 Entidades Mapeadas
 
-## Requisitos
+| Entidade | Atributos Chave |
+| :--- | :--- |
+| **Produto** | Nome, Descrição, Valor, Categoria |
+| **Cliente** | Nome, Endereço, CPF/CNPJ (Especialização) |
+| **Pedido** | ID, Status, Valor do Frete, Valor Total, Descrição |
+| **Pagamento** | Instituição, Dados do Cartão, Vencimento |
+| **Entrega** | Código de Rastreio, Status da Logística |
+| **Fornecedor/Terceiros** | Razão Social, CNPJ |
 
+### 🔗 Relacionamentos Complexos
+- `[Pedido] N:M [Produto]`: Tabela intermediária para itens do pedido.
+- `[Produto] N:M [Estoque]`: Controle de disponibilidade por localidade.
+- `[Vendedores] N:M [Produto]`: Permite o modelo de marketplace.
 
-### Entidades
+---
 
-**Produto:** Nome, descrição, valor, categoria
+## 🗺️ Documentação Visual
 
-**Estoque:** Local
+### 📐 Schema Lógico (EER)
+Detalhamento técnico das tabelas e chaves estrangeiras:
+![Modelo EER](modelo-EER.png)
 
-**Cliente:** Nome, Endereço
+### 📊 Schema Conceitual (UML)
+Abstração das entidades e fluxos de informação:
+![Modelo UML](modelo-uml.png)
 
-- **Pessoa fśisica:** CPF
-- **Pessoa jurídica:** CNPJ
-
-**Pagamento:** Intituição, Número do cartão, Data vencimento,  Bandeira
-
-**Pedido:** Identificação pedido, status, valor frete, valor pedido, descrição
-
-**Entrega:** Status, Código de rastreio, endereço
-
-**Fornecedor:** Razão social, CNPJ
-
-**Terceiros:** Razão social, CNPJ
-
-
-### Relacionamentos
-
-**Cliente x Pagamento (1, N)** - Formas de pagamento do cliente
-
-**Cliente x Pedido (1, N)** - Pedidos do cliente
-
-**Pedido x Pagamento (N, 1)** - Pagamento do pedido
-
-**Pedido x Entrega (1, 1)** - Entrega do pedido
-
-**Pedido x Produto (N, M)** - Produtos do pedido
-
-**Produto x Estoque (N, M)** - Produtos em estoque
-
-**Produto x Fornecedor (N, M)** - Disponibilizar produto (Fornecedor)
-
-**Produto x Terceiros (N, M)** - Disponibilizar produto (Terceiro)
-
-## Modelo UML
-
-![](https://github.com/NandesLima/e-commerce-bd/blob/master/modelo-uml.png)
-
-
-## Modelo EER
-
-![](https://github.com/NandesLima/e-commerce-bd/blob/master/modelo-EER.png)
-
-
-
+---
+*Este repositório demonstra proficiência em **Engenharia de Requisitos** e **Modelagem de Dados** aplicada a ecossistemas de vendas digitais.*
