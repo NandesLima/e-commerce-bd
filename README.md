@@ -67,11 +67,11 @@ A arquitetura foi construída sobre os seguintes pilares de negócio:
 
 ### 📐 Schema Lógico (EER)
 Detalhamento técnico das tabelas e chaves estrangeiras:
-![Modelo EER](modelo-EER.png)
+![Modelo EER](docs/assets/modelo-eer.png)
 
 ### 📊 Schema Conceitual (UML)
 Abstração das entidades e fluxos de informação:
-![Modelo UML](modelo-uml.png)
+![Modelo UML](docs/assets/modelo-uml.png)
 
 ---
 *Este repositório demonstra proficiência em **Engenharia de Requisitos** e **Modelagem de Dados** aplicada a ecossistemas de vendas digitais.*
