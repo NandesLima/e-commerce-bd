@@ -23,12 +23,15 @@ theme:
         name: Alternar para modo escuro
   features:
     - navigation.tabs
-    - navigation.sections
     - navigation.top
     - search.suggest
     - search.highlight
     - content.code.copy
     - content.tabs.link
+
+nav:
+  - Início: index.md
+  - O Projeto: projeto.md
 
 extra:
   social:
