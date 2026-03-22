@@ -32,6 +32,7 @@ theme:
 nav:
   - Início: index.md
   - O Projeto: projeto.md
+  - Scripts SQL: scripts.md
 
 extra:
   social:
